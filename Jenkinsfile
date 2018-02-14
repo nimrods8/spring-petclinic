@@ -1,7 +1,7 @@
 #!groovy
 
 pipeline {
-  agent none
+  agent { label 'ubuntu' }
   stages {
     stage('Maven Install') {
       agent {
