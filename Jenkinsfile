@@ -4,11 +4,12 @@ pipeline {
   agent { label 'ubuntu' }
   stages {
     stage('Maven Install') {
-#      agent {
+      agent {
         docker {
           image 'maven:3.5.0'
+          label 'ubuntu'
         }
-#     }
+      }
       steps {
         sh 'mvn clean install'
       }
