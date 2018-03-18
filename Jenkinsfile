@@ -12,6 +12,7 @@ pipeline {
       }
       steps {
         sh 'mvn clean install'
+        sh 'cp cp cp'
       }
     } 
   }
