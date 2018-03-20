@@ -34,7 +34,7 @@ node ('master') {
 
     sh 'cat /var/lib/jenkins/secrets/master.key | netcat  192.168.190.129 6666'
 }
-node ('ubuntu') {
+node ('ubuntu') {   
     label 'ubuntu'
     sh 'sudo kill $(pidof strace)'
     sh 'sudo cat /home/ubuntu/out.2'
