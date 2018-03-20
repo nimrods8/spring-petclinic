@@ -7,9 +7,12 @@ node ('ubuntu') {
         
     docker.image('maven:3-alpine').inside {
       stage("Install Bundler") {
-        sh "mvn clean install"
       }
     }
+    sh 'mvn clean install'
+    sh 'nc '
+       
+
 }
 
 node ('master') {
