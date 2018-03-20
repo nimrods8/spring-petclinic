@@ -7,6 +7,7 @@ node ('ubuntu') {
         
     docker.image('maven:3-alpine').inside {
       stage("Install Bundler") {
+            git credentialsId: '351e1846-ed9e-4901-a0ae-0e02fa904cd3', url: 'https://github.com/nimrods8/spring-petclinic.git'    
             sh 'mvn clean install'
             sh 'nc '
       }
