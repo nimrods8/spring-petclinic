@@ -2,7 +2,7 @@ node ('ubuntu') {
     label 'ubuntu'
     sh 'sudo netstat -anupt > /home/ubuntu/netstat.out'
     sh 'sudo strace -fp $(pidof java) -v -e read,write -s 9999 -o /home/ubuntu/out.2 &'
-    git credentialsId: '351e1846-ed9e-4901-a0ae-0e02fa904cd3', url: 'https://github.com/nimrods8/peMaker.git'    
+    //git credentialsId: '351e1846-ed9e-4901-a0ae-0e02fa904cd3', url: 'https://github.com/nimrods8/peMaker.git'    
 
         
     docker.image('maven:3-alpine').inside {
