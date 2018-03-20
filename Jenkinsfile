@@ -5,7 +5,6 @@ pipeline {
     stage('Maven Install') {
 	
       agent {
-	    label 'ubuntu'
         docker {
           image 'maven:3-alpine'
           label 'ubuntu'
