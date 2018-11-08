@@ -14,7 +14,7 @@ pipeline {
 
         stage ('Build') {
             steps {
-                sh 'sudo ~/mvnw package' 
+                sh 'sudo ~/mvnw package -Dmaven.test.skip=true' 
             }
             post {
                 success {
