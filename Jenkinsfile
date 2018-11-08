@@ -22,7 +22,7 @@ pipeline {
 
         stage ('Build') {
             steps {
-                    sh 'sudo apt-get install default-jdk'
+                    sh 'sudo apt-get install -y default-jdk'
                     sh 'sudo ~/mvnw package -Dmaven.test.skip=true' 
             }
             post {
