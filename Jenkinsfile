@@ -57,7 +57,20 @@ pipeline {
                                     app.push("${env.BUILD_NUMBER}")
                                     app.push("latest")             
                             }
-                       }
+                   
+/*
+                                kubernetesDeploy(kubeconfigId: 'kubeconfig-credentials-id',               // REQUIRED
+                                         configs: '<ant-glob-pattern-for-resource-config-paths>', // REQUIRED
+                                         enableConfigSubstitution: false,
+                                         secretNamespace: '<secret-namespace>',
+                                         secretName: '<secret-name>',
+                                        dockerCredentials: [
+                                                [credentialsId: '<credentials-id-for-docker-hub>'],
+                                                [credentialsId: '<credentials-id-for-other-private-registry>', url: '<registry-url>'],
+                                        ]
+                                )
+*/
+                       } // endscript
                }
         }
     } // end stages
