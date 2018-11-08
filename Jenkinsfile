@@ -45,7 +45,7 @@ pipeline {
         stage ('Deploy') {
                steps {
                        script {
-                            dbuild = docker.build( "petclinic:${env.BUILD_ID}")
+                            dbuild = docker.build( "devopswar/petclinic:${env.BUILD_ID}")
                             dbuild.push()
                        }
                }
