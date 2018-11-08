@@ -44,7 +44,7 @@ pipeline {
          
         stage ('Deploy') {
                steps {
-                    def dbuild = docker.build( "petclinic:${env.BUILD_ID}")
+                    dbuild = docker.build( "petclinic:${env.BUILD_ID}")
                     dbuild.push()
                }
         }
