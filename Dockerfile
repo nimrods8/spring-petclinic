@@ -1,4 +1,5 @@
 FROM anapsix/alpine-java
 LABEL maintainer="labs@cyberark.com"
-COPY /home/ubuntu/workspace/spring-project/target/ /home/
+WORKDIR /home/ubuntu/workspace/spring-project/target/
+COPY . /home
 CMD ["java","-jar","/home/spring-petclinic-*.jar"]
