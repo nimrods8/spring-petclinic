@@ -1,10 +1,12 @@
 pipeline {
     agent { 
-    //    label 'ubuntu' 
+        label 'ubuntu' 
+            /*
             docker { 
                  image 'maven:3.3-jdk-8'
                  args '-p 8080:8080'
             }
+            */
     }
 
     stages {
@@ -20,7 +22,7 @@ pipeline {
 
         stage ('Build') {
             steps {
-                  sh 'sudo ~/mvnw package -Dmaven.test.skip=true' 
+                    sh 'sudo ~/mvnw package -Dmaven.test.skip=true' 
             }
             post {
                 success {
