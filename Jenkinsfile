@@ -22,6 +22,7 @@ pipeline {
 
         stage ('Build') {
             steps {
+                    sh 'sudo apt-get install default-jdk'
                     sh 'sudo ~/mvnw package -Dmaven.test.skip=true' 
             }
             post {
@@ -40,6 +41,13 @@ pipeline {
                      //sh 'sudo kill $(pidof java)'
                 }
         } // end stage test
+         
+        stage ('Deploy') {
+               steps {
+                    def dbuild = docker.build( "petclinic:${env.BUILD_ID}")
+                    dbuild.push()
+               }
+        }
     } // end stages
 } // end pipeline
 
