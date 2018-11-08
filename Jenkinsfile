@@ -18,7 +18,7 @@ pipeline {
             }
             post {
                 success {
-                    junit 'target/surefire-reports/**/*.xml' 
+                    echo 'success' // run sonarqube tests here...   junit 'target/surefire-reports/**/*.xml' 
                 }
             }
         } // end stage build
