@@ -27,6 +27,7 @@ pipeline {
              sh 'java -jar ./target/spring-petclinic-2.0.0.jar &'
              sh 'sleep 5'
              sh 'wget localhost:8080 && echo "tests success" || exit 1
+             sh 'sudo kill $(pidof java)'
         } // end stage test
     } // end stages
 } // end pipeline
