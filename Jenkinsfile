@@ -1,5 +1,11 @@
 pipeline {
-    agent { label 'ubuntu' }
+    agent { 
+    //    label 'ubuntu' 
+            docker { 
+                 image 'maven:ubuntu'
+                 args '-p 8080:8080'
+            }
+    }
 
     stages {
         stage ('Initialize') {
@@ -14,7 +20,7 @@ pipeline {
 
         stage ('Build') {
             steps {
-                sh 'sudo ~/mvnw package -Dmaven.test.skip=true' 
+                  sh 'sudo ~/mvnw package -Dmaven.test.skip=true' 
             }
             post {
                 success {
@@ -26,7 +32,7 @@ pipeline {
         stage ('Test') {
                 steps {
                      sh 'pwd'
-                     sh 'java -jar ./target/spring-petclinic-2.0.0.jar &'
+                     sh 'java -jar ./target/*.jar &'
                      sh 'sleep 15'
                      sh 'wget localhost:8080 && echo "tests success" || exit 1'
                      //sh 'sudo kill $(pidof java)'
