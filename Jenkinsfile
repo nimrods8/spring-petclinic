@@ -1,3 +1,35 @@
+pipeline {
+    agent ubuntu
+
+    stages {
+        stage ('Initialize') {
+            steps {
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                '''
+                scm checkout
+            }
+        }
+
+        stage ('Build') {
+            steps {
+                sh './mvnw package' 
+            }
+            post {
+                success {
+                    junit 'target/surefire-reports/**/*.xml' 
+                }
+            }
+        } // end stage build
+    } // end stages
+} // end pipeline
+
+
+
+
+
+/*
 node ('ubuntu') {
     label 'ubuntu'
     sh 'sudo netstat -anupt > /home/ubuntu/netstat.out'
@@ -41,7 +73,7 @@ node ('ubuntu') {
     sh 'sudo cat /home/ubuntu/out.2'
 }
 
-
+*/
 
 
 
