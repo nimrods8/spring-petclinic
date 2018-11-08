@@ -45,8 +45,11 @@ pipeline {
         stage ('Deploy') {
                steps {
                        script {
-                            dbuild = docker.build( "devopswar/petclinic:${env.BUILD_ID}")
-                            dbuild.push()
+                            app = docker.build( "petclinic:${env.BUILD_ID}")
+                            docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-devopswar') {
+                                    app.push("${env.BUILD_NUMBER}")
+                                    app.push("latest")             
+                            }
                        }
                }
         }
