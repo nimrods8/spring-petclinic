@@ -18,10 +18,16 @@ pipeline {
             }
             post {
                 success {
-                    echo 'success' // run sonarqube tests here...   junit 'target/surefire-reports/**/*.xml' 
+                    echo 'build success' // run sonarqube tests here...   junit 'target/surefire-reports/**/*.xml' 
                 }
             }
         } // end stage build
+            
+        stage ('Test') {
+             sh 'java -jar ./target/spring-petclinic-2.0.0.jar &'
+             sh 'sleep 5'
+             sh 'wget localhost:8080 && echo "tests success" || exit 1
+        } // end stage test
     } // end stages
 } // end pipeline
 
