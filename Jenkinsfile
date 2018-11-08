@@ -42,6 +42,13 @@ pipeline {
                 }
         } // end stage test
          
+        stage ('wait for input') { 
+               steps { 
+                   input id: 'Deploy', message: 'Proceed with Green node deployment?', ok: 'Deploy!'                       
+               }    
+        }
+            
+            
         stage ('Deploy') {
                steps {
                        script {
