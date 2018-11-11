@@ -42,6 +42,9 @@ pipeline {
                                  /* Run some tests which require MySQL */
                                  // after the mysql is up -> run the target
                                  sh 'java -jar ./target/*.jar &'
+                                
+                                 input id: 'Deploy', message: 'Proceed with Green node deployment?', ok: 'Deploy!'                       
+                                
                          } // end docker run
                      } // end script
                        
@@ -64,7 +67,7 @@ pipeline {
                             app = docker.build( "devopswar/petclinic")
                             docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-devopswar') {
                                     app.push("${env.BUILD_NUMBER}")
-                                    app.push("latest")             
+                                    app.push("latest")
                             }
                    
 /*
