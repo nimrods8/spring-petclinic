@@ -77,7 +77,7 @@ pipeline {
                             }        
 
                                     
-                            withKubeConfig(caCertificate: '', contextName: '', credentialsId: 'kube-config-file', serverUrl: '') 
+                            withKubeConfig([caCertificate: '', contextName: '', credentialsId: 'kube-config-file', serverUrl: 'https://172.31.17.90:6443']) 
                             {
                                  // some block
                                  sh 'kubectl get pods'                                    
