@@ -81,15 +81,16 @@ pipeline {
                                  // some block
                                  sh 'kubectl get pods'                                    
                             }                                    
-/*                                    
-                            kubernetesDeploy configs: '<includes="**/*"/>', 
-                                                      kubeConfig: [path: ''], 
-                                                      kubeconfigId: 'kube-config2', 
-                                                      secretName: '', 
-                                                      ssh: [sshCredentialsId: '*', sshServer: ''], 
-                                                      textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']                                    
-                            }
-*/                 
+
+                                    
+//                            kubernetesDeploy configs: '<includes="**/*"/>', 
+//                                                      kubeConfig: [path: ''], 
+//                                                      kubeconfigId: 'kube-config2', 
+//                                                      secretName: '', 
+//                                                      ssh: [sshCredentialsId: '*', sshServer: ''], 
+//                                                      textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']                                    
+//                            }
+                 
 /*
                                 kubernetesDeploy(kubeconfigId: 'kubeconfig-credentials-id',               // REQUIRED
                                          configs: '<ant-glob-pattern-for-resource-config-paths>', // REQUIRED
