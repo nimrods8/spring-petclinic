@@ -42,8 +42,8 @@ pipeline {
                                 sh 'while ! mysqladmin ping -h0.0.0.0 --silent; do sleep 1; done'
                                 
                                 // setup the database
-                                sh 'mysql --protocol tcp -h localhost -u root -p petclinic petclinic <  schema.sql'
-                                sh 'mysql --protocol tcp -h localhost -u root -p petclinic petclinic <  data.sql'
+                                sh 'mysql --protocol tcp -h localhost -u root -p petclinic petclinic <  src/main/resources/db/mysql/schema.sql'
+                                sh 'mysql --protocol tcp -h localhost -u root -p petclinic petclinic <  src/main/resources/db/mysql/data.sql'
 
                                 /* Run some tests which require MySQL */
                                 // after the mysql is up -> run the target
