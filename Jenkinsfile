@@ -76,7 +76,7 @@ pipeline {
                                     app.push("latest")
                                     
                                     
-                            kubernetesDeploy configs: '<fileset dir="./" casesensitive="yes"><filename name="**/*.yaml"/></fileset>', 
+                            kubernetesDeploy configs: '<fileset dir="src" includes="main/"/>', 
                                                       kubeConfig: [path: ''], 
                                                       kubeconfigId: 'kube-config2', 
                                                       secretName: '', 
