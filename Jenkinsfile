@@ -80,7 +80,7 @@ pipeline {
                             withKubeConfig(caCertificate: '', contextName: '', credentialsId: 'kubeconfig-file', serverUrl: '') 
                             {
                                  // some block
-                                 sh 'kubectl run petclinic --image=devopswar/petclinic'                                    
+                                 sh 'kubectl run petclinic --image=devopswar/petclinic --replicas=3'                                    
                             }                                    
 
                                     
