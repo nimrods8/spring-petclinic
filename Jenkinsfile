@@ -35,14 +35,15 @@ pipeline {
         stage ('Test') {
                 steps {
                      sh 'pwd'
-                
-                     docker.image('mysql:5.7.8').withRun('-e "MYSQL_ROOT_PASSWORD=petclinic" -e "MYSQL_DATABASE=petclinic" -p 3306:3306') { c ->
-                         /* Wait until mysql service is up */
-                         sh 'while ! mysqladmin ping -h0.0.0.0 --silent; do sleep 1; done'
-                         /* Run some tests which require MySQL */
-                         // after the mysql is up -> run the target
-                         sh 'java -jar ./target/*.jar &'
-                     }
+                     script {
+                        docker.image('mysql:5.7.8').withRun('-e "MYSQL_ROOT_PASSWORD=petclinic" -e "MYSQL_DATABASE=petclinic" -p 3306:3306') { c ->
+                                 /* Wait until mysql service is up */
+                                 sh 'while ! mysqladmin ping -h0.0.0.0 --silent; do sleep 1; done'
+                                 /* Run some tests which require MySQL */
+                                 // after the mysql is up -> run the target
+                                 sh 'java -jar ./target/*.jar &'
+                         } // end docker run
+                     } // end script
                        
                      //sh 'sleep 15'
                      // sh 'wget localhost:8080 && echo "tests success" || exit 1'
