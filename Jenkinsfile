@@ -49,7 +49,7 @@ pipeline {
                                 // after the mysql is up -> run the target
                                 sh 'java -jar ./target/*.jar &'
                                 
-                                input id: 'Deploy', message: 'Proceed with Green node deployment?', ok: 'Deploy!'                       
+                                //input id: 'Deploy', message: 'Proceed with Green node deployment?', ok: 'Deploy!'                       
                                 
                          } // end docker run
                      } // end script
@@ -76,7 +76,7 @@ pipeline {
                                     app.push("latest")
                                     
                                     
-                            kubernetesDeploy configs: '/home/ubuntu/a.yaml', 
+                            kubernetesDeploy configs: '<fileset dir="/home/" includes="ubuntu/"/>', 
                                                       kubeConfig: [path: ''], 
                                                       kubeconfigId: 'kube-config2', 
                                                       secretName: '', 
