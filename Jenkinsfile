@@ -74,10 +74,11 @@ pipeline {
                             docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-devopswar') {
                                     app.push("${env.BUILD_NUMBER}")
                                     app.push("latest")
-                                    
+                            }        
 
                                     
-                            withKubeConfig(caCertificate: '', contextName: '', credentialsId: 'kube-config-file', serverUrl: '') {
+                            withKubeConfig(caCertificate: '', contextName: '', credentialsId: 'kube-config-file', serverUrl: '') 
+                            {
                                  // some block
                                  sh 'kubectl get pods'                                    
                             }                                    
