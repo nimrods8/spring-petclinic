@@ -74,6 +74,14 @@ pipeline {
                             docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-devopswar') {
                                     app.push("${env.BUILD_NUMBER}")
                                     app.push("latest")
+                                    
+                                    
+                            kubernetesDeploy configs: '/home/ubuntu/a.yaml', 
+                                                      kubeConfig: [path: ''], 
+                                                      kubeconfigId: 'kube-config2', 
+                                                      secretName: '', 
+                                                      ssh: [sshCredentialsId: '*', sshServer: ''], 
+                                                      textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']                                    
                             }
                    
 /*
