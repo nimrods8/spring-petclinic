@@ -75,7 +75,13 @@ pipeline {
                                     app.push("${env.BUILD_NUMBER}")
                                     app.push("latest")
                                     
+
                                     
+                            withKubeConfig(caCertificate: '', contextName: '', credentialsId: 'kube-config-file', serverUrl: '') {
+                                 // some block
+                                 sh 'kubectl get pods'                                    
+                            }                                    
+/*                                    
                             kubernetesDeploy configs: '<includes="**/*"/>', 
                                                       kubeConfig: [path: ''], 
                                                       kubeconfigId: 'kube-config2', 
@@ -83,7 +89,7 @@ pipeline {
                                                       ssh: [sshCredentialsId: '*', sshServer: ''], 
                                                       textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']                                    
                             }
-                   
+*/                 
 /*
                                 kubernetesDeploy(kubeconfigId: 'kubeconfig-credentials-id',               // REQUIRED
                                          configs: '<ant-glob-pattern-for-resource-config-paths>', // REQUIRED
