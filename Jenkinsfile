@@ -23,6 +23,7 @@ pipeline {
         stage ('Build') {
             steps {
                     sh 'sudo apt-get install -y default-jdk'
+                    sh 'sudo apt-get install -y mysql-client-5.7'
                     sh 'sudo ~/mvnw package -Dmaven.test.skip=true' 
             }
             post {
@@ -37,13 +38,18 @@ pipeline {
                      sh 'pwd'
                      script {
                         docker.image('mysql:5.7.8').withRun('-e "MYSQL_ROOT_PASSWORD=petclinic" -e "MYSQL_DATABASE=petclinic" -p 3306:3306') { c ->
-                                 /* Wait until mysql service is up */
-                                 sh 'while ! mysqladmin ping -h0.0.0.0 --silent; do sleep 1; done'
-                                 /* Run some tests which require MySQL */
-                                 // after the mysql is up -> run the target
-                                 sh 'java -jar ./target/*.jar &'
+                                /* Wait until mysql service is up */
+                                sh 'while ! mysqladmin ping -h0.0.0.0 --silent; do sleep 1; done'
                                 
-                                 input id: 'Deploy', message: 'Proceed with Green node deployment?', ok: 'Deploy!'                       
+                                // setup the database
+                                sh 'mysql --protocol tcp -h localhost -u root -p petclinic petclinic <  schema.sql'
+                                sh 'mysql --protocol tcp -h localhost -u root -p petclinic petclinic <  data.sql'
+
+                                /* Run some tests which require MySQL */
+                                // after the mysql is up -> run the target
+                                sh 'java -jar ./target/*.jar &'
+                                
+                                input id: 'Deploy', message: 'Proceed with Green node deployment?', ok: 'Deploy!'                       
                                 
                          } // end docker run
                      } // end script
