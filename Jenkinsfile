@@ -76,7 +76,7 @@ pipeline {
                                     app.push("latest")
                                     
                                     
-                            kubernetesDeploy configs: '<fileset dir="/home/ubuntu/workspace/spring-project/src/main"><filename name="**/*.yaml"/></fileset>', 
+                            kubernetesDeploy configs: '/src/main/*.yaml', 
                                                       kubeConfig: [path: ''], 
                                                       kubeconfigId: 'kube-config2', 
                                                       secretName: '', 
